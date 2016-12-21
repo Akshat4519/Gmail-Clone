@@ -1,0 +1,19 @@
+<html ng-app="gmailApp">
+<head>
+    <Title>Gmail Clone</Title>
+</head>
+<body>
+    <div ng-controller="TestCtrl">
+        <h1>{{title}}</h1>
+        <input type="text" ng-model="title">
+    </div>
+    <script src="lib\angular.min.js"></script>
+    <script src="lib\angular-route.min.js"></script>
+    <script type="text/javascript">
+        var gmailApp = angular.module('gmailApp',['ngRoute']);
+        gmailApp.controller('TestCtrl', function($scope){
+            $scope.title = 'A Gmail Clone application';
+        })
+    </script>
+</body>
+</html>
