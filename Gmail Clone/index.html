@@ -1,21 +1,46 @@
 <html ng-app="gmailApp">
+
 <head>
-    <title>Gmail Clone</title>
+    <Title>Gmail Clone</Title>
 </head>
+
 <body>
+    <p>New paragraph.</p>
     <div ng-controller="TestCtrl">
         <h1>{{title}}</h1>
         <input type="text" ng-model="title">
     </div>
-
+    <div ng-controller="InboxCtrl">
+        {{ title }}
+    </div>
     <script src="lib\angular.min.js"></script>
     <script src="lib\angular-route.min.js"></script>
-
     <script type="text/javascript">
-        var gmailApp = angular.module('gmailApp', ['ngRoute']);
-        gmailApp.controller('TestCtrl', function ($scope) {
+        var gmailApp = angular.module('gmailApp',['ngRoute']);
+        gmailApp.controller('TestCtrl', function($scope){
             $scope.title = 'A Gmail Clone application';
-        })
-    </script>
+        });
+        gmailApp.config(function ($routeProvider) {
+           $routeProvider
+           .when('/inbox', {
+             templateUrl: 'views/inbox.html',
+             controller: 'InboxCtrl',
+             controllerAs: 'inbox'
+         })
+           .when('/inbox/email/:id', {
+             templateUrl: 'views/email.html',
+             controller: 'EmailCtrl',
+             controllerAs: 'email'
+         })
+           .otherwise({
+             redirectTo: '/inbox'
+         });
+       });
+        gmailApp.controller('InboxCtrl', function ($scope) {
+        // initialize the title property to an array for the view to use   
+        $scope.title = "This is a title";
+    });
+</script>
 </body>
+
 </html>
